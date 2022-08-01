@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 class Chapter2 {
     public static void main(String[] args) {
         long big = 100_000_000L;
@@ -25,6 +23,24 @@ class Chapter2 {
         //Scanner scanner = new Scanner(System.in);
         //String input = scanner.nextLine();
         //System.out.printf("input: %s\n", input);
+
+        Chapter2.CharToCode();
+
+        float f2 = 12.1f;
+        // declarative casting is required to convert float to int (from wider type to narrower type)
+        int d2 = (int) f2;
+    }
+
+    static void CharToCode() {
+        char ch1 = 'A';
+        int code1 = (int) ch1;
+        System.out.printf("%c=%d(%#X)\n", ch1, code1, code1);
+
+        char ch2 = '가';
+        int code2 = (int) ch2;
+        System.out.printf("%c=%d(%#X)\n", ch2, code2, code2);
+
+
     }
 
 }
