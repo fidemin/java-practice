@@ -37,6 +37,16 @@ class Chapter3 {
 
         System.out.println(Chapter3.UpperCase('a'));
         System.out.println(Chapter3.UpperCase('b'));
+
+        // integer 10 will be transformed to 10.0f before operation
+        System.out.printf("100 == 10.0f \t %b\n", 10==10.0f);
+
+        // use equals method for string comparison.
+        String str1 = "abc";
+        String str2 = new String("abc");
+        System.out.println(str1 == str2); // false
+        System.out.println(str1.equals(str2)); // true
+
     }
 
     static char UpperCase(char lowerCase) {
