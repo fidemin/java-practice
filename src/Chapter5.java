@@ -16,5 +16,31 @@ public class Chapter5 {
         System.out.println(Arrays.toString(arr2));
         System.out.println(Arrays.toString(arr3));
 
+        // copy array
+        int[] newArr = new int[arr1.length*2];
+        System.arraycopy(arr1, 0, newArr, 0, arr1.length);
+        System.out.println(Arrays.toString(newArr));
+
+        // Lotto!
+        Chapter5.lotto();
+    }
+
+    static void lotto() {
+        int[] nums = new int[45];
+        for (int i=0; i<nums.length; i++) {
+            nums[i] = i + 1;
+        }
+
+        for (int i=0; i<6; i++) {
+            int j = (int)(Math.random() * nums.length); // 0 ~ 44
+            int tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
+        }
+
+        for (int i=0; i<6; i++) {
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println();
     }
 }

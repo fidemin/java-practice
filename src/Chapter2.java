@@ -24,14 +24,14 @@ class Chapter2 {
         //String input = scanner.nextLine();
         //System.out.printf("input: %s\n", input);
 
-        Chapter2.CharToCode();
+        Chapter2.charToCode();
 
         float f2 = 12.1f;
         // declarative casting is required to convert float to int (from wider type to narrower type)
         int d2 = (int) f2;
     }
 
-    static void CharToCode() {
+    static void charToCode() {
         char ch1 = 'A';
         int code1 = (int) ch1;
         System.out.printf("%c=%d(%#X)\n", ch1, code1, code1);

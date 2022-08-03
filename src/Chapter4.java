@@ -1,10 +1,10 @@
 public class Chapter4 {
     public static void main(String[] args) {
-        PrintSeason(5);
-        PrintSeason(7);
-        PrintSeason(10);
-        PrintSeason(1);
-        PrintSeason(13);
+        printSeason(5);
+        printSeason(7);
+        printSeason(10);
+        printSeason(1);
+        printSeason(13);
 
         int[] arr = {10, 20, 30, 40, 50};
         for (int i: arr) {
@@ -12,7 +12,7 @@ public class Chapter4 {
         }
     }
 
-    public static void PrintSeason(int month) {
+    public static void printSeason(int month) {
         switch (month) {
             case 3: case 4: case 5:
                 System.out.println("Spring");

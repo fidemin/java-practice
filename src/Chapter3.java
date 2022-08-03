@@ -35,8 +35,8 @@ class Chapter3 {
         l1 = (long) i2 * i3; // l1 = 2_000_000_000_000 ? Yes!
         System.out.println(l1);
 
-        System.out.println(Chapter3.UpperCase('a'));
-        System.out.println(Chapter3.UpperCase('b'));
+        System.out.println(Chapter3.upperCase('a'));
+        System.out.println(Chapter3.upperCase('b'));
 
         // integer 10 will be transformed to 10.0f before operation
         System.out.printf("100 == 10.0f \t %b\n", 10==10.0f);
@@ -49,7 +49,7 @@ class Chapter3 {
 
     }
 
-    static char UpperCase(char lowerCase) {
+    static char upperCase(char lowerCase) {
         return (char)(lowerCase - 32);
     }
 }
