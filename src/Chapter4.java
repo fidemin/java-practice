@@ -5,6 +5,11 @@ public class Chapter4 {
         PrintSeason(10);
         PrintSeason(1);
         PrintSeason(13);
+
+        int[] arr = {10, 20, 30, 40, 50};
+        for (int i: arr) {
+            System.out.println(i);
+        }
     }
 
     public static void PrintSeason(int month) {
