@@ -40,6 +40,25 @@ public class Chapter5 {
         }
         System.out.println();
         System.out.printf("Total scores: %d\n", sum);
+
+        int[][] m1 = {
+                {1, 2, 3},
+                {4, 5, 6}
+        };
+
+        int[][] m2 = {
+                {1, 2},
+                {3, 4},
+                {5, 6}
+        };
+
+        int[][] m3 = Chapter5.multiplyMatrix(m1, m2);
+        for (int[] row: m3) {
+            for (int value: row) {
+                System.out.printf("%3d", value);
+            }
+            System.out.println();
+        }
     }
 
     static void lotto() {
@@ -59,5 +78,18 @@ public class Chapter5 {
             System.out.print(nums[i] + " ");
         }
         System.out.println();
+    }
+
+    static int[][] multiplyMatrix(int[][] A, int[][] B) {
+        int[][] result = new int[A.length][B[0].length];
+
+        for (int i=0; i<result.length; i++) {
+            for (int j=0; j<result[i].length; j++) {
+                for (int k=0; k<A[i].length; k++) {
+                    result[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+        return result;
     }
 }
