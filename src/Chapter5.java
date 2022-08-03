@@ -23,6 +23,23 @@ public class Chapter5 {
 
         // Lotto!
         Chapter5.lotto();
+
+        // 2d array
+        int[][] scores = {
+                {100, 100, 100},
+                {50, 60, 80},
+                {10, 20, 30}
+        };
+
+        int sum = 0;
+        for (int[] row: scores) {
+            for (int score: row) {
+                System.out.printf("%d ", score);
+                sum += score;
+            }
+        }
+        System.out.println();
+        System.out.printf("Total scores: %d\n", sum);
     }
 
     static void lotto() {
