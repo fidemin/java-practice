@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Chapter5 {
+public class Chapter05 {
     public static void main(String[] args) {
         // three ways to initialize array
         int[] arr1 = new int[5];
@@ -52,7 +52,7 @@ public class Chapter5 {
                 {5, 6}
         };
 
-        int[][] m3 = Chapter5.multiplyMatrix(m1, m2);
+        int[][] m3 = Chapter05.multiplyMatrix(m1, m2);
         for (int[] row: m3) {
             for (int value: row) {
                 System.out.printf("%3d", value);

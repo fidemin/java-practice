@@ -1,4 +1,4 @@
-class Chapter2 {
+class Chapter02 {
     public static void main(String[] args) {
         long big = 100_000_000L;
         System.out.printf("big=%d\n", big);
@@ -24,7 +24,7 @@ class Chapter2 {
         //String input = scanner.nextLine();
         //System.out.printf("input: %s\n", input);
 
-        Chapter2.charToCode();
+        Chapter02.charToCode();
 
         float f2 = 12.1f;
         // declarative casting is required to convert float to int (from wider type to narrower type)

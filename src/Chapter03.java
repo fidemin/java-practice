@@ -1,4 +1,4 @@
-class Chapter3 {
+class Chapter03 {
     public static void main(String[] args) {
         int x, y;
         // 1. x = (y = 3) -> 2. x = 3
@@ -35,8 +35,8 @@ class Chapter3 {
         l1 = (long) i2 * i3; // l1 = 2_000_000_000_000 ? Yes!
         System.out.println(l1);
 
-        System.out.println(Chapter3.upperCase('a'));
-        System.out.println(Chapter3.upperCase('b'));
+        System.out.println(Chapter03.upperCase('a'));
+        System.out.println(Chapter03.upperCase('b'));
 
         // integer 10 will be transformed to 10.0f before operation
         System.out.printf("100 == 10.0f \t %b\n", 10==10.0f);

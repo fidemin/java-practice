@@ -1,4 +1,4 @@
-public class Chapter4 {
+public class Chapter04 {
     public static void main(String[] args) {
         printSeason(5);
         printSeason(7);
