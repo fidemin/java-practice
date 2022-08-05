@@ -22,7 +22,7 @@ public class Chapter5 {
         System.out.println(Arrays.toString(newArr));
 
         // Lotto!
-        Chapter5.lotto();
+        lotto();
 
         // 2d array
         int[][] scores = {
