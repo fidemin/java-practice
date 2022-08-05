@@ -1,3 +1,5 @@
+package javabasic;
+
 class Chapter03 {
     public static void main(String[] args) {
         int x, y;

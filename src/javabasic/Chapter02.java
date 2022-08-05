@@ -1,3 +1,5 @@
+package javabasic;
+
 class Chapter02 {
     public static void main(String[] args) {
         long big = 100_000_000L;
