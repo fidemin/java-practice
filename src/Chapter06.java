@@ -2,8 +2,10 @@ public class Chapter06 {
     public static void main(String[] args) {
         System.out.println(add(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
 
-        Car car = new Car("blue", "auto", 4);
-        System.out.println(car);
+        Car car1 = new Car("blue", "auto", 4);
+        Car car2 = new Car("red");
+        System.out.println(car1);
+        System.out.println(car2);
     }
 
     static int add(int... nums) {
@@ -13,9 +15,19 @@ public class Chapter06 {
         }
         return result;
     }
+
 }
 
 class Car {
+    static int numOfCars;
+    static {
+       numOfCars = 0;
+    }
+
+    {
+        numOfCars++;
+    }
+
     String color;
     String gearType;
     int numOfDoors;
@@ -24,6 +36,10 @@ class Car {
         this.color = color;
         this.gearType = gearType;
         this.numOfDoors = numOfdoors;
+    }
+
+    Car(String color) {
+        this(color, "auto", 4);
     }
 
     @Override
