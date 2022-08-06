@@ -9,6 +9,9 @@ public class Chapter07 {
         System.out.println(deck.pick(0));
         deck.shuffle();
         System.out.println(deck.pick(0));
+
+        Product p1 = new Tv();
+        Product p2 = new Radio();
     }
 
 }
@@ -63,5 +66,36 @@ class Card {
     @Override
     public String toString() {
         return kinds[this.kind] + " " + numbers.charAt(this.number);
+    }
+}
+
+
+class Product {
+    protected int price;
+    protected int bonus;
+
+    Product(int price, int bonus) {
+        this.price = price;
+        this.bonus = bonus;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getBonus() {
+        return bonus;
+    }
+}
+
+class Tv extends Product {
+    Tv() {
+        super(1000_000, 1000);
+    }
+}
+
+class Radio extends Product {
+    Radio() {
+        super(100_000, 1000);
     }
 }
