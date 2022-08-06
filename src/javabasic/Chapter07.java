@@ -16,6 +16,7 @@ public class Chapter07 {
         Product p2 = new Radio();
         Product p3 = new Radio();
         Product p4 = new Tv();
+        Product p5 = new Tv();
 
         Buyer yunhong = new Buyer("Yunhong", 1500_000);
         yunhong.buy(p1);
@@ -23,6 +24,10 @@ public class Chapter07 {
         yunhong.buy(p3);
         yunhong.buy(p4);
         yunhong.summary();
+        yunhong.refund(p1);
+        yunhong.refund(p2);
+        yunhong.refund(p5);
+
     }
 
 }
@@ -80,8 +85,12 @@ class Card {
     }
 }
 
+interface Refundable {
+    boolean canRefund();
+}
 
-abstract class Product {
+
+abstract class Product implements Refundable {
     protected String name;
     protected int price;
     protected int points;
@@ -110,11 +119,21 @@ class Tv extends Product {
     Tv() {
         super("TV", 1000_000, 1000);
     }
+
+    @Override
+    public boolean canRefund() {
+        return true;
+    }
 }
 
 class Radio extends Product {
     Radio() {
         super("Radio", 100_000, 1000);
+    }
+
+    @Override
+    public boolean canRefund() {
+        return false;
     }
 }
 
@@ -140,6 +159,20 @@ class Buyer {
         this.money -= p.getPrice();
         this.points += p.getPoints();
         this.products.add(p);
+    }
+
+    public void refund(Product p) {
+        if (!p.canRefund()) {
+            System.out.println("Can't refund");
+            return;
+        }
+
+        if (products.remove(p)) {
+            this.money += p.getPrice();
+            this.points += p.getPoints();
+        } else {
+            System.out.println("You have no product to refund");
+        }
     }
 
     public void summary() {
