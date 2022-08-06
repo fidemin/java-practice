@@ -1,5 +1,7 @@
 package javabasic;
 
+import java.util.Vector;
+
 public class Chapter07 {
     public static void main(String[] args) {
         Deck deck = new Deck();
@@ -12,6 +14,15 @@ public class Chapter07 {
 
         Product p1 = new Tv();
         Product p2 = new Radio();
+        Product p3 = new Radio();
+        Product p4 = new Tv();
+
+        Buyer yunhong = new Buyer("Yunhong", 1500_000);
+        yunhong.buy(p1);
+        yunhong.buy(p2);
+        yunhong.buy(p3);
+        yunhong.buy(p4);
+        yunhong.summary();
     }
 
 }
@@ -71,31 +82,82 @@ class Card {
 
 
 class Product {
+    protected String name;
     protected int price;
-    protected int bonus;
+    protected int points;
 
-    Product(int price, int bonus) {
+    Product(String name, int price, int points) {
+        this.name = name;
         this.price = price;
-        this.bonus = bonus;
+        this.points = points;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public int getBonus() {
-        return bonus;
+    public int getPoints() {
+        return points;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
 
 class Tv extends Product {
     Tv() {
-        super(1000_000, 1000);
+        super("TV", 1000_000, 1000);
     }
 }
 
 class Radio extends Product {
     Radio() {
-        super(100_000, 1000);
+        super("Radio", 100_000, 1000);
+    }
+}
+
+class Buyer {
+    private String name;
+    private int money;
+    private int points;
+
+    private Vector<Product> products = new Vector<>();
+
+    Buyer(String name, int money) {
+        this.name = name;
+        this.money = money;
+        this.points = 0;
+    }
+
+    public void buy(Product p) {
+        if (p.getPrice() > this.money) {
+            System.out.printf("%s don't have enough money to buy %s.%n", this.name, p);
+            return;
+        }
+
+        this.money -= p.getPrice();
+        this.points += p.getPoints();
+        this.products.add(p);
+    }
+
+    public void summary() {
+        System.out.printf("%s's summary\n", this.name);
+        System.out.printf("money: %d, points: %d\n", this.money, this.points);
+        System.out.printf("purchased products: ");
+        for (int i=0; i<products.size(); i++) {
+            if (i == 0) {
+                System.out.printf("%s", products.get(i));
+            } else {
+                System.out.printf(",%s", products.get(i));
+            }
+        }
+        System.out.println();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Buyer(name=%s, money=%d, points=%d", this.name, this.money, this.points);
     }
 }
