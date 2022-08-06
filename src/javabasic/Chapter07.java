@@ -15,7 +15,7 @@ public class Chapter07 {
 
 class Deck {
     final int CARD_NUM = Card.KIND_MAX * Card.NUM_MAX;
-    Card[] cards = new Card[CARD_NUM];
+    final Card[] cards = new Card[CARD_NUM];
 
     Deck () {
         for (int k=0; k<Card.KIND_MAX; k++) {
@@ -52,8 +52,8 @@ class Card {
     static final String[] kinds = {"SPADE", "DIAMOND", "HEART", "CLOVER"};
     static final String numbers = "123456789XJQK";
 
-    int kind;
-    int number;
+    final int kind;
+    final int number;
 
     Card(int kind, int number) {
         this.kind = kind;
