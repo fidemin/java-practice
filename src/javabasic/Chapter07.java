@@ -3,6 +3,18 @@ package javabasic;
 import java.util.Vector;
 
 public class Chapter07 {
+    class InstanceInner {
+        int iv = 100;
+        // static int CONST = 100; // static for instance inner class is not permitted without final
+        // final + static -> constant!!
+        final static int CONST = 100;
+    }
+
+    static class StaticInner {
+        int iv = 200;
+        static int cv = 200;
+    }
+
     public static void main(String[] args) {
         Deck deck = new Deck();
         System.out.println(deck.pick());
@@ -28,8 +40,13 @@ public class Chapter07 {
         yunhong.refund(p2);
         yunhong.refund(p5);
 
-    }
+        System.out.println(InstanceInner.CONST);
+        // InstanceInner ii = new InstanceInner(); // In static method, only static class instance and member variable can be used.
 
+        System.out.println(StaticInner.cv);
+        StaticInner s = new StaticInner();
+        System.out.println(s.iv);
+    }
 }
 
 class Deck {
