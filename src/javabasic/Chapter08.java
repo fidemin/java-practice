@@ -28,6 +28,8 @@ public class Chapter08 {
 }
 
 class IntArithmeticException extends Exception {
+    // Exception is checked exception. User is required to deal with exception.
+    // But in these days, RuntimeException which is unchecked exception is preferable, because user can choose to deal with exception.
     public IntArithmeticException() {
        super();
     }
