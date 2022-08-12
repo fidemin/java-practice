@@ -21,6 +21,14 @@ public class Chapter09 {
 
             Class cObj3 = Class.forName("Circle");
         } catch (ClassNotFoundException e) {}
+
+        Integer iObj1 = new Integer(10);
+        int i1 = 20;
+        int i2 = i1 + iObj1;  // iObj1 is unboxed to int automatically.
+        System.out.println(i2);
+
+        Integer iObj2 = i1 + iObj1; // i1 is autoboxing.
+        System.out.println(iObj2);
     }
 }
 
