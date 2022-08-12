@@ -14,6 +14,13 @@ public class Chapter09 {
         c2.center.y = 20;
 
         System.out.println(c1.center.equals(c2.center)); // should be false
+
+        Class cObj1 = new Circle(p1, 3).getClass();
+        Class cObj2 = Class.class;
+        try {
+
+            Class cObj3 = Class.forName("Circle");
+        } catch (ClassNotFoundException e) {}
     }
 }
 
