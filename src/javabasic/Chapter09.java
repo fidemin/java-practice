@@ -1,5 +1,6 @@
 package javabasic;
 
+import java.math.BigInteger;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,12 +66,23 @@ public class Chapter09 {
         while (m.find()) {
             System.out.printf("%s -> %s, %s, %s\n", m.group(), m.group(1), m.group(2), m.group(3));
         }
+
+        for (int i=0; i<50; i++) {
+            System.out.printf("%d!=%s\n", i, factorial(BigInteger.valueOf(i)).toString());
+        }
     }
 
     static String getRandFromArray(String[] arr) {
         Random rand = new Random();
         int pos = rand.nextInt(arr.length);
         return arr[pos];
+    }
+
+    static BigInteger factorial(BigInteger n) {
+        if (n.equals(BigInteger.ZERO)) {
+            return BigInteger.ONE;
+        }
+        return n.multiply(factorial(n.subtract(BigInteger.ONE)));
     }
 }
 
