@@ -1,6 +1,8 @@
 package javabasic;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Chapter09 {
     public static void main(String[] args) {
@@ -53,6 +55,15 @@ public class Chapter09 {
         for (int i=0; i<record_num; i++) {
             System.out.println("INSERT INTO " + table_name +
                     " VALUES ('" + getRandFromArray(code1)+ "', '" +  getRandFromArray(code2) + "');");
+        }
+
+        String source = "HP:011-1111-1111, HOME:02-999-9998";
+        String pattern = "(0\\d{1,2})-(\\d{3,4})-(\\d{4})";
+
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(source);
+        while (m.find()) {
+            System.out.printf("%s -> %s, %s, %s\n", m.group(), m.group(1), m.group(2), m.group(3));
         }
     }
 
