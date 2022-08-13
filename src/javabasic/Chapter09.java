@@ -1,5 +1,7 @@
 package javabasic;
 
+import java.util.Random;
+
 public class Chapter09 {
     public static void main(String[] args) {
         Point p1 = new Point(0, 1);
@@ -29,6 +31,35 @@ public class Chapter09 {
 
         Integer iObj2 = i1 + iObj1; // i1 is autoboxing.
         System.out.println(iObj2);
+
+        Random rand = new Random(1); // same seed -> same result
+        Random rand2 = new Random(1);
+
+        System.out.println("-------");
+        for (int i=0; i<5; i++) {
+            System.out.println(rand.nextInt());
+        }
+
+        System.out.println("-------");
+        for (int i=0; i<5; i++) {
+            System.out.println(rand2.nextInt());
+        }
+
+        final int record_num = 10;
+        final String table_name = "Person";
+        final String[] code1 = {"010", "011", "017"};
+        final String[] code2 = {"male", "female"};
+
+        for (int i=0; i<record_num; i++) {
+            System.out.println("INSERT INTO " + table_name +
+                    " VALUES ('" + getRandFromArray(code1)+ "', '" +  getRandFromArray(code2) + "');");
+        }
+    }
+
+    static String getRandFromArray(String[] arr) {
+        Random rand = new Random();
+        int pos = rand.nextInt(arr.length);
+        return arr[pos];
     }
 }
 
