@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjuster;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -80,8 +82,26 @@ public class Chapter10 {
         ZoneId zid2 = ZoneId.of("America/New_York");
         System.out.println(ZonedDateTime.now().withZoneSameInstant(zid2));
 
+        // TemporalAdjuster
+        System.out.println(zdt.with(new DayAfterTomorrow()));
 
+        Period p1 = Period.between(birthDate, date);
+        System.out.println(p1.getYears());
+        System.out.println(p1.getMonths());
+        System.out.println(p1.getDays());
 
+        // There is no way to calculate actual total days from period.
+        // To do this, we can use
+
+        long daysFromBirth = ChronoUnit.DAYS.between(birthDate, date);
+        System.out.println(daysFromBirth);
+
+        // Or
+        System.out.println(birthDate.until(date, ChronoUnit.DAYS));
+
+        Duration d1 = Duration.between(birthTime, time);
+        System.out.println(d1.getSeconds());
+        System.out.println(d1.toMillis());
     }
 
     static void printCalendar(Calendar cal) {
@@ -89,5 +109,12 @@ public class Chapter10 {
                 cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH),
                 cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND),
                 cal.get(Calendar.ZONE_OFFSET) / (60 * 60 * 1000), DAY_OF_WEEK[cal.get(Calendar.DAY_OF_WEEK)]);
+    }
+
+    static class DayAfterTomorrow implements TemporalAdjuster {
+        @Override
+        public Temporal adjustInto(Temporal temporal) {
+            return temporal.plus(2, ChronoUnit.DAYS);
+        }
     }
 }
