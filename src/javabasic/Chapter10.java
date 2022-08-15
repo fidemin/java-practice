@@ -5,6 +5,8 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjuster;
@@ -99,9 +101,19 @@ public class Chapter10 {
         // Or
         System.out.println(birthDate.until(date, ChronoUnit.DAYS));
 
+        // Duration
         Duration d1 = Duration.between(birthTime, time);
         System.out.println(d1.getSeconds());
         System.out.println(d1.toMillis());
+
+        // DateTimeFormatter
+        String yyyy_mm_dd = DateTimeFormatter.ISO_LOCAL_DATE.format(date);
+        System.out.println(yyyy_mm_dd);
+        DateTimeFormatter lFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
+        System.out.println(lFormatter.format(date));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd VV");
+        System.out.println(formatter.format(zdt));
     }
 
     static void printCalendar(Calendar cal) {
