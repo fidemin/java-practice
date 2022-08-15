@@ -1,6 +1,7 @@
 package javabasic;
 
 import javax.security.auth.callback.CallbackHandler;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,6 +24,9 @@ public class Chapter10 {
         Calendar cal3 = Calendar.getInstance();
         cal3.add(Calendar.MONTH, -1);
         printCalendar(cal3);
+
+        DecimalFormat df = new DecimalFormat("#,###.##");
+        System.out.println(df.format(1234567.891)); // 1,234,567.89
 
     }
 
