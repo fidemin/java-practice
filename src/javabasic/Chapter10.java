@@ -2,6 +2,7 @@ package javabasic;
 
 import javax.security.auth.callback.CallbackHandler;
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,6 +42,10 @@ public class Chapter10 {
         } catch (ParseException e) {
            System.out.println("Wrong format");
         }
+
+        MessageFormat mf1 = new MessageFormat("Name: {0}, Age: {1}");
+        Object[] arguments = {"Yunhong", "22"};
+        System.out.println(mf1.format(arguments));
 
     }
 
