@@ -2,17 +2,18 @@ package javabasic;
 
 import javax.security.auth.callback.CallbackHandler;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Chapter10 {
     final static String[] DAY_OF_WEEK = {"", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Calendar cal1 = Calendar.getInstance();
         printCalendar(cal1);
 
-        Date d = new Date(cal1.getTimeInMillis());
 
         Calendar cal2 = Calendar.getInstance();
         cal2.set(Calendar.MONTH, Calendar.JULY);
@@ -27,6 +28,19 @@ public class Chapter10 {
 
         DecimalFormat df = new DecimalFormat("#,###.##");
         System.out.println(df.format(1234567.891)); // 1,234,567.89
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SZ");
+        Date d = new Date(cal1.getTimeInMillis());
+        System.out.println(sdf.format(d));
+
+
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sdf2.parse("2022-08-22");
+            System.out.println(sdf.format(date));
+        } catch (ParseException e) {
+           System.out.println("Wrong format");
+        }
 
     }
 
