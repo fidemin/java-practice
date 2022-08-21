@@ -1,6 +1,7 @@
 package javabasic;
 
 import sun.rmi.runtime.NewThreadAction;
+import sun.security.krb5.internal.EncASRepPart;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,6 +30,7 @@ public class Chapter12 {
         list.add(nc);
 
         AnnotationEx.run();
+        EnumEx.run();
     }
 }
 
@@ -124,3 +126,89 @@ class AnnotationEx {
 }
 
 enum TestType { FIRST, FINAL }
+
+enum SimpleDirection { EAST, SOUTH, WEST, NORTH}
+enum Direction {
+    EAST(1, ">") {
+        @Override
+        public String korean() {
+            return "동쪽";
+        }
+    },
+    SOUTH(2, "V") {
+        @Override
+        public String korean() {
+            return "남쪽";
+        }
+    },
+    WEST(3, "<") {
+        @Override
+        public String korean() {
+            return "서쪽";
+        }
+    }, NORTH(4, "^") {
+        @Override
+        public String korean() {
+            return "북쪽";
+        }
+    };
+
+    private static final Direction[] DIR_ARR = Direction.values();
+    private final int value;
+    private final String symbol;
+
+    abstract public String korean();
+
+    Direction(int value, String symbol) {
+        this.value = value;
+        this.symbol = symbol;
+    }
+
+    public Direction rotate(int num) {
+        num = num % 4;
+
+        if (num < 0) num += 4;
+
+        return DIR_ARR[(value-1+num) % 4];
+    }
+
+    @Override
+    public String toString() {
+        return name() + "(" + symbol + ")";
+    }
+}
+
+class EnumEx {
+    static void run() {
+
+        SimpleDirection d1 = SimpleDirection.NORTH;
+        SimpleDirection d2 = SimpleDirection.WEST;
+
+        switch (d1) {
+            case EAST:
+                System.out.println("East!"); break;
+            case SOUTH:
+                System.out.println("South!"); break;
+            case WEST:
+                System.out.println("West!"); break;
+            case NORTH:
+                System.out.println("North!"); break;
+            default:
+                System.out.println("Invalid direction!"); break;
+        }
+
+        SimpleDirection[] dArr = SimpleDirection.values();
+
+        for (SimpleDirection d : dArr) {
+            System.out.println(d.name() + "=" + d.ordinal());
+        }
+
+        Direction d3 = Direction.EAST;
+        System.out.println(d3.korean());
+        Direction d4 = Direction.WEST;
+        System.out.println(d3.rotate(1));
+        System.out.println(d3.rotate(2));
+        System.out.println(d3.rotate(3));
+        System.out.println(d3.rotate(4));
+    }
+}
