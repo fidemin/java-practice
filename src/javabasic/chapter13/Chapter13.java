@@ -1,8 +1,4 @@
-package javabasic;
-
-import sun.awt.windows.ThemeReader;
-
-import javax.swing.*;
+package javabasic.chapter13;
 
 public class Chapter13 {
     public static void main(String[] args) throws Exception {
