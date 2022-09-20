@@ -36,6 +36,23 @@ public class Chapter13 {
         }
 
         t3.interrupt();
+
+        GarbageCollector gc = new GarbageCollector();
+        gc.setDaemon(true);
+        gc.start();
+
+        int requiredMemory = 0;
+
+        for (int i = 0; i < 20; i++) {
+            requiredMemory = (int) (Math.random() * 10) * 20;
+            if (gc.freeMemory() < requiredMemory || gc.freeMemory() < gc.totalMemory() * 0.4) {
+                gc.interrupt();
+                gc.join(100);
+            }
+
+            gc.setUsedMemory(gc.getUsedMemory() + requiredMemory);
+            System.out.println("usedMemory: " + gc.getUsedMemory());
+        }
     }
 
     public static void delay(int millis) {
@@ -50,5 +67,44 @@ class Thread1 extends Thread {
     public void run() {
         System.out.println(getThreadGroup().getName());
         throw new RuntimeException("Thread exception");
+    }
+}
+
+class GarbageCollector extends Thread {
+    private final int MAX_MEMORY = 1000;
+
+    private int usedMemory = 0;
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Thread.sleep(10 * 1000);
+            } catch (InterruptedException e) {
+                System.out.println("exception = " + e);
+                gc();
+                System.out.println("GC: free memory:" + freeMemory());
+            }
+        }
+    }
+
+    public void gc() {
+        usedMemory -= 300;
+        if (usedMemory < 0) usedMemory = 0;
+    }
+
+    public int totalMemory() {
+        return MAX_MEMORY;
+    }
+
+    public int freeMemory() {
+        return MAX_MEMORY - usedMemory;
+    }
+
+    public int getUsedMemory() {
+        return usedMemory;
+    }
+
+    public void setUsedMemory(int usedMemory) {
+        this.usedMemory = usedMemory;
     }
 }
