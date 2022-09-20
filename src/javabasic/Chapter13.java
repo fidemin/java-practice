@@ -1,9 +1,15 @@
 package javabasic;
 
+import sun.awt.windows.ThemeReader;
+
 import javax.swing.*;
 
 public class Chapter13 {
     public static void main(String[] args) throws Exception {
+        Runnable r = new BankThread();
+        new Thread(r).start();
+        new Thread(r).start();
+
         Thread t1 = new Thread1();
         t1.start();
 
@@ -106,5 +112,39 @@ class GarbageCollector extends Thread {
 
     public void setUsedMemory(int usedMemory) {
         this.usedMemory = usedMemory;
+    }
+}
+
+
+class Account {
+    private int balance = 1000;
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void withdraw(int money) {
+        synchronized (this) {
+            if (balance >= money) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+                balance -= money;
+            } else {
+                return;
+            }
+        }
+    }
+}
+
+class BankThread implements Runnable {
+    Account account = new Account();
+    @Override
+    public void run() {
+        while (account.getBalance() > 0) {
+            int money = (int) (Math.random() * 3 + 1) * 100;
+            account.withdraw(money);
+            System.out.println("account.getBalance() = " + account.getBalance());
+        }
     }
 }
