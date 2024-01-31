@@ -23,8 +23,6 @@ public class ReentrantLockPractice {
         receiverThread1.start();
         receiverThread2.start();
 
-        System.out.println();
-
         Thread.sleep(1000);
 
         senderThread.start();
@@ -88,7 +86,6 @@ class MessageStore {
         lock.lock();
         try {
             boolean await = condition.await(1, TimeUnit.SECONDS);
-            Thread thread = Thread.currentThread();
             if (await) {
                 return this.message;
             }
