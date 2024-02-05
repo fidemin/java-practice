@@ -82,10 +82,16 @@ class MessageStore {
     private final ReentrantLock lock = new ReentrantLock();
     private final Condition condition = lock.newCondition();
 
+    String getThreadNameString() {
+        return "[" + Thread.currentThread().getName() +"]";
+    }
+
     String getMessage() {
         lock.lock();
+        System.out.println(getThreadNameString() + " getMessage lock acquire");
         try {
-            boolean await = condition.await(1, TimeUnit.SECONDS);
+            boolean await = condition.await(10, TimeUnit.SECONDS);
+            System.out.println(getThreadNameString() + " await: " + lock.isLocked());
             if (await) {
                 return this.message;
             }
@@ -94,16 +100,20 @@ class MessageStore {
             throw new RuntimeException(e);
         } finally {
             lock.unlock();
+            System.out.println(getThreadNameString() + " getMessage lock release: " + lock.isLocked());
         }
     }
 
     void sendMessage(String message) {
         lock.lock();
+        System.out.println("sendMessage lock acquire");
         try {
             this.message = message;
             condition.signalAll();
+            System.out.println("signalAll: " + lock.isLocked());
         } finally {
             lock.unlock();
+            System.out.println("sendMessage lock release: " + lock.isLocked());
         }
     }
 }
