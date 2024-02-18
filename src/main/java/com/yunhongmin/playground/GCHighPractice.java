@@ -1,4 +1,4 @@
-package playground;
+package com.yunhongmin.playground;
 
 public class GCHighPractice {
     public static void main(String[] args) {

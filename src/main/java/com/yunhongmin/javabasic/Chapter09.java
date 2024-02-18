@@ -1,4 +1,4 @@
-package javabasic;
+package com.yunhongmin.javabasic;
 
 import java.math.BigInteger;
 import java.util.Random;

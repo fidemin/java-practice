@@ -1,7 +1,4 @@
-package javabasic;
-
-import sun.rmi.runtime.NewThreadAction;
-import sun.security.krb5.internal.EncASRepPart;
+package com.yunhongmin.javabasic;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

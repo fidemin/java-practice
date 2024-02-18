@@ -1,4 +1,4 @@
-package javabasic;
+package com.yunhongmin.javabasic;
 
 import java.util.Arrays;
 

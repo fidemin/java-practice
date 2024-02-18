@@ -1,4 +1,4 @@
-package javabasic;
+package com.yunhongmin.javabasic;
 
 class Chapter03 {
     public static void main(String[] args) {
