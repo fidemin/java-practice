@@ -9,4 +9,14 @@ public class OneBankClient extends ExternalBankClient {
         }
         return true;
     }
+
+    @Override
+    public ExternalBankResponse send(ExternalBankRequest request) {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            return new OneBankResponse(500);
+        }
+        return new OneBankResponse(200);
+    }
 }

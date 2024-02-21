@@ -1,7 +1,6 @@
 package com.yunhongmin.playground.bank.external.bank;
 
-import com.yunhongmin.playground.bank.external.api.ExternalBankClient;
-import com.yunhongmin.playground.bank.external.api.OneBankClient;
+import com.yunhongmin.playground.bank.external.api.*;
 
 public class OneBank extends ExternalBank {
     ExternalBankName bankName;
@@ -13,7 +12,13 @@ public class OneBank extends ExternalBank {
 
     @Override
     public boolean transferTo(String bankAccount, int amount) {
-        client.send(bankAccount, amount);
+        ExternalBankRequest request = new OneBankRequest(bankAccount, amount);
+        ExternalBankResponse response = client.send(request);
+        if (response.resultCode != 200) {
+            System.out.printf("Transfer failed: %s %s with amount %d won%n", bankName, bankAccount, amount);
+            return false;
+        }
+
         System.out.printf("Transferred to %s %s with amount %d won%n", bankName, bankAccount, amount);
         return true;
     }
