@@ -1,6 +1,6 @@
 package com.yunhongmin.playground.bank;
 
-import com.yunhongmin.playground.bank.external.ExternalBankName;
+import com.yunhongmin.playground.bank.external.bank.ExternalBankName;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

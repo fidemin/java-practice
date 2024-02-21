@@ -1,7 +1,7 @@
 package com.yunhongmin.playground.bank;
 
-import com.yunhongmin.playground.bank.external.ExternalBank;
-import com.yunhongmin.playground.bank.external.ExternalBankName;
+import com.yunhongmin.playground.bank.external.bank.ExternalBank;
+import com.yunhongmin.playground.bank.external.bank.ExternalBankName;
 
 public class Bank {
     public void transfer(Account fromAccount, Account toAccount, int amount) {

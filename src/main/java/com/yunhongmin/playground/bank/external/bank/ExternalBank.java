@@ -1,4 +1,4 @@
-package com.yunhongmin.playground.bank.external;
+package com.yunhongmin.playground.bank.external.bank;
 
 public abstract class ExternalBank {
     public static ExternalBank fromExternalBankName(ExternalBankName name) {
