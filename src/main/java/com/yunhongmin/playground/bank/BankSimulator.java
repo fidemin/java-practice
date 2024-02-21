@@ -1,5 +1,6 @@
 package com.yunhongmin.playground.bank;
 
+import com.yunhongmin.playground.bank.external.ExternalBankName;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,9 @@ public class BankSimulator {
 
         Account account1 = new Account(1, "Tom");
         Account account2 = new Account(2, "Jerry");
+
+        account1.addToBalance(10000);
+        account2.addToBalance(10000);
 
         TransferSimulator simulator1 = new TransferSimulator(bank, account1, account2, 1);
         TransferSimulator simulator2 = new TransferSimulator(bank, account2, account1, 1);
@@ -42,6 +46,10 @@ class TransferSimulator implements Runnable {
     public void run() {
         for (int i=0; i<1000; i++) {
             bank.transfer(fromAccount, toAccount, oneAmount);
+        }
+
+        for (int i=0; i<50; i++) {
+            bank.transfer(fromAccount, ExternalBankName.ONE_BANK, "0100001234", oneAmount);
         }
     }
 }

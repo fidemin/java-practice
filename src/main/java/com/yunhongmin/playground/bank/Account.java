@@ -18,9 +18,9 @@ public class Account {
     Lock lock = new ReentrantLock();
 
     public void addToBalance(int amount) {
-//        if (balance + amount < 0) {
-//            throw new RuntimeException("balance is not enough");
-//        }
+        if (balance + amount < 0) {
+            throw new RuntimeException("balance is not enough");
+        }
         balance += amount;
     }
 
