@@ -133,6 +133,9 @@ src/main/generated/**
 ## MacOS
 .DS_Store
 
+# jenv
+.java-version
+
 # env file
 *.env
 
