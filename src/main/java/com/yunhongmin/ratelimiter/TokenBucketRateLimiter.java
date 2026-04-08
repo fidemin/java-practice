@@ -19,7 +19,7 @@ public class TokenBucketRateLimiter implements RateLimiter {
     }
 
     @Override
-    public boolean tryAcquire() {
+    public boolean tryAcquire(String key) {
         refill();
         return acquire();
     }

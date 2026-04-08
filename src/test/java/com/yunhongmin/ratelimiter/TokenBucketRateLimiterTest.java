@@ -10,20 +10,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TokenBucketRateLimiterTest {
+    static String defaultKey = "default";
 
     @Test
     void acquireSucceedsWhenBucketHasTokens() {
         TokenBucketRateLimiter limiter = new TokenBucketRateLimiter(5, 1, RateTimeUnit.SECONDS);
-        assertTrue(limiter.tryAcquire());
+        assertTrue(limiter.tryAcquire(defaultKey));
     }
 
     @Test
     void acquireFailsWhenBucketIsEmpty() {
         TokenBucketRateLimiter limiter = new TokenBucketRateLimiter(3, 1, RateTimeUnit.SECONDS);
-        limiter.tryAcquire();
-        limiter.tryAcquire();
-        limiter.tryAcquire();
-        assertFalse(limiter.tryAcquire());
+        limiter.tryAcquire(defaultKey);
+        limiter.tryAcquire(defaultKey);
+        limiter.tryAcquire(defaultKey);
+        assertFalse(limiter.tryAcquire(defaultKey));
     }
 
     @Test
@@ -32,20 +33,20 @@ class TokenBucketRateLimiterTest {
         TokenBucketRateLimiter limiter = new TokenBucketRateLimiter(bucketSize, 1, RateTimeUnit.SECONDS);
 
         for (int i = 0; i < bucketSize; i++) {
-            assertTrue(limiter.tryAcquire(), "Expected acquire #" + (i + 1) + " to succeed");
+            assertTrue(limiter.tryAcquire(defaultKey), "Expected acquire #" + (i + 1) + " to succeed");
         }
-        assertFalse(limiter.tryAcquire(), "Expected acquire to fail after bucket is empty");
+        assertFalse(limiter.tryAcquire(defaultKey), "Expected acquire to fail after bucket is empty");
     }
 
     @Test
     void bucketRefillsAfterWaiting() throws InterruptedException {
         TokenBucketRateLimiter limiter = new TokenBucketRateLimiter(1, 1, RateTimeUnit.SECONDS);
-        assertTrue(limiter.tryAcquire());
-        assertFalse(limiter.tryAcquire());
+        assertTrue(limiter.tryAcquire(defaultKey));
+        assertFalse(limiter.tryAcquire(defaultKey));
 
         Thread.sleep(1100); // wait for refill
 
-        assertTrue(limiter.tryAcquire());
+        assertTrue(limiter.tryAcquire(defaultKey));
     }
 
     @Test
@@ -53,22 +54,22 @@ class TokenBucketRateLimiterTest {
         // refillRate=2, SECONDS: adds 2 tokens every 2 seconds
         TokenBucketRateLimiter limiter = new TokenBucketRateLimiter(4, 2, RateTimeUnit.SECONDS);
         // drain bucket
-        limiter.tryAcquire();
-        limiter.tryAcquire();
-        limiter.tryAcquire();
-        limiter.tryAcquire();
+        limiter.tryAcquire(defaultKey);
+        limiter.tryAcquire(defaultKey);
+        limiter.tryAcquire(defaultKey);
+        limiter.tryAcquire(defaultKey);
 
         // wait 3s: one full 2s period fires (adds 2), 1s remainder carries over
         Thread.sleep(3000);
-        assertTrue(limiter.tryAcquire());
-        assertTrue(limiter.tryAcquire());
-        assertFalse(limiter.tryAcquire());
+        assertTrue(limiter.tryAcquire(defaultKey));
+        assertTrue(limiter.tryAcquire(defaultKey));
+        assertFalse(limiter.tryAcquire(defaultKey));
 
         // wait 1s more: remainder (1s) + 1s = 2s, triggers another refill
         Thread.sleep(1100);
-        assertTrue(limiter.tryAcquire());
-        assertTrue(limiter.tryAcquire());
-        assertFalse(limiter.tryAcquire());
+        assertTrue(limiter.tryAcquire(defaultKey));
+        assertTrue(limiter.tryAcquire(defaultKey));
+        assertFalse(limiter.tryAcquire(defaultKey));
     }
 
     @Test
@@ -90,7 +91,7 @@ class TokenBucketRateLimiterTest {
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
-                if (limiter.tryAcquire()) {
+                if (limiter.tryAcquire(defaultKey)) {
                     successCount.incrementAndGet();
                 }
             });
@@ -108,14 +109,14 @@ class TokenBucketRateLimiterTest {
     void bucketDoesNotExceedMaxSizeOnRefill() throws InterruptedException {
         TokenBucketRateLimiter limiter = new TokenBucketRateLimiter(2, 1, RateTimeUnit.SECONDS);
         // drain bucket
-        limiter.tryAcquire();
-        limiter.tryAcquire();
+        limiter.tryAcquire(defaultKey);
+        limiter.tryAcquire(defaultKey);
 
         Thread.sleep(3000); // wait long enough to refill more than bucket size
 
         // should only be able to acquire bucketSize times
-        assertTrue(limiter.tryAcquire());
-        assertTrue(limiter.tryAcquire());
-        assertFalse(limiter.tryAcquire());
+        assertTrue(limiter.tryAcquire(defaultKey));
+        assertTrue(limiter.tryAcquire(defaultKey));
+        assertFalse(limiter.tryAcquire(defaultKey));
     }
 }
